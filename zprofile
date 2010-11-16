@@ -189,8 +189,8 @@ fi
 unset host_ value_
 
 # Source any local (host specific) settings
-if [ -r ~/.zsh/local/zprofile ]; then
-    . ~/.zsh/local/zprofile
+if [ -r ~/.zsh_local/zprofile ]; then
+    . ~/.zsh_local/zprofile
 fi
 
 # vim: set sw=2 tw=80:

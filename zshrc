@@ -222,7 +222,7 @@ zstyle ':completion:*' prompt 'Possible corrections (%e errors)'
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 zstyle ':completion:*' substitute 1
 zstyle ':completion:*' verbose true
-zstyle ':completion:*:urls' urls ~/.zsh/urls
+zstyle ':completion:*:urls' urls ~/.zsh_local/urls
 zstyle :compinstall filename ~/.zshrc
 
 autoload -Uz compinit
@@ -361,8 +361,8 @@ compinit
     ;;
   esac
 
-  if [ -r ~/.zsh/local/zshrc ]; then	# Host specific settings
-    . ~/.zsh/local/zshrc
+  if [ -r ~/.zsh_local/zshrc ]; then	# Host specific settings
+    . ~/.zsh_local/zshrc
   fi
 fi
 
