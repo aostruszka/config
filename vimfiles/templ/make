@@ -1,0 +1,42 @@
+# $@ - file name of the target of the rule
+# $% - target member name when the target is archive member
+# $< - the name of the first dependency
+# $? - the names of all dependencies that are newer then the target
+# $^ - the names of all dependencies
+
+# Optimization level (empty means no optimization)
+OPTLEV =
+
+# Debugging level (empty means no debugging information)
+DEBUGLEV =
+
+#=============================
+# End of configuration part
+#=============================
+
+SRCDIR := $(HOME)/Sources
+INCDIR := $(SRCDIR)/include
+LIBDIR := $(SRCDIR)/Libs
+#VPATH := ???:$(INCDIR):$(LIBDIR)
+
+CC = gcc
+CFLAGS = -I"$(INCDIR)" -Wall $(DEBUGFL) $(OPTFLAGS)
+
+LDFLAGS = -L"$(LIBDIR)"
+LIBS = -lm # -lamo
+
+ifneq ($(strip $(DEBUGLEV)),)
+DEBUGFL = -ggdb$(DEBUGLEV)
+endif
+
+OPTFLAGS = -malign-double -mcpu=i686 -march=i686
+
+ifneq ($(strip $(OPTLEV)),)
+OPTFLAGS += -O$(strip $(OPTLEV))
+endif
+
+SRCS = 
+OBJS = $(SRCS:.c=.o)
+
+all: $(OBJS)
+	$(CC) $(CFLAGS) ???? $(OBJS) $(LDFLAGS) $(LIBS)

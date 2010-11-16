@@ -1,0 +1,36 @@
+qq qw
+sub
+STDIN STDOUT STDERR DATA
+__FILE__ __LINE__ __END__
+eq ne lt gt cmp not and or xor
+if unless while until elsif else goto last next redo do continue for foreach
+bless caller import no package require returen BEGIN END tie untie use
+abs atan cos exp int log rand sin sqrt srand time
+chr gmtime hex localtime oct ord vec
+pcack unpack
+chomp chop crypt eval index length quotemeta rindex substr
+lc lcfirst uc ucfirst
+delete each exists grep join keys map pop push reverse scalar shift sort
+splice split unshift values
+tr pos study
+chmod chown truncate link lstat mkdir readlink rename rmdir stat symlink
+unlink utime
+binmode close dbmclos dbmopen eoffcntl fileno flock getc ioctl open pipe print
+printf read seek select sprintf sysread syswrite tell
+formline write
+closedir opendir readdir rewinddir seekdir telldir
+alarm chdir chroot die exec exit fork getlogin getprgp getppid fetpriority
+glob kill setgrp setpriority sleep syscallsystemn times umask wait waitpid
+warn
+accept bind connect getpeernmae getsockname lisen recv send setsocket shutdown
+socket socketpair
+msgctl msgget msgsnd msgrcv semctl semget semop shmctl shmget shmread shmwrite
+defined dump lcoal my ref reset undef wantarray
+passwd endpwent getpwent getpwnam getpwuid setpwent group endgrent getgrid
+getgrnam getgrent setgrent hosts endhostent gethostbyname gethostent
+sethostent networks endnetent getnetbyaddr getnetbyname getnetent setnetent
+services endservent getservbyname getservbyport getservent setservent
+protocols endprotoent getprotobyname getprotobynumber getprotoent setprotoent
+ARGV EXPORT INC ISA ENV OVERLOAD SIG
+HOME LOGDIR PATH PEL5LIB PERL5DB PERLLIB
+

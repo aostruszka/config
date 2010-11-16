@@ -1,0 +1,5 @@
+addprefsto = default
+include default
+
+root = /path/to/root1
+root = /path/to/root2

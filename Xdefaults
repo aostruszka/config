@@ -1,0 +1,126 @@
+! Author: Andrzej M. Ostruszka
+! Last modified:  Wed Jan 07, 23:52 (2009)
+! Cygwin (rxvt) settings
+! You can freely use it for your own purposes
+
+XTerm*geometry:		80x45
+
+! Sometimes xterm comes with toolbar compiled - I don't like it so
+XTerm.toolBar:	false
+
+*scrollBar:	true
+*saveLines:	1500
+
+! 9x15 is my favorite font in Linux but somehow it does not work properly in
+! Cygwin and the 8x16 (one of the hardcoded defaults of rxvt is a bit too small
+! for me)
+#if POLISH_LOCALE == 1
+XTerm*font:		9x15pl
+Rxvt*font:		9x15pl
+#else
+XTerm*font:		9x15
+Rxvt*font:		9x15
+#endif
+!XTerm*font:		Terminal
+
+! If you would prefer larger fonts that this is viable option (if you
+! choose it then you probably would like to change the geometry as well
+! - the value given below is a reasonable choice on 1024x768 screen)
+!XTerm*font:		10x20
+!XTerm*geometry:		80x36
+
+XTerm*fullCursor:	true
+XTerm*reverseWrap:	true
+
+*visualBell:		true
+*scrollTtyOutput:	true
+*scrollKey:		true
+Scrollbar.JumpCursor:	true
+
+! Uncomment this to allow Underlining, instead of the color representation
+!*VT100*underLine: on
+
+! Color definitions: 0-7 black red green yellow blue magenta cyan white
+! and 8-15 are their high intensity equivalents
+XTerm.color0: Black
+XTerm.color1: Red3
+XTerm.color2: Green3
+XTerm.color3: Yellow3
+XTerm.color4: Blue3
+XTerm.color5: Magenta3
+XTerm.color6: Cyan3
+XTerm.color7: Gray90
+XTerm.color8: Gray30
+XTerm.color9: Red
+XTerm.color10: Green
+XTerm.color11: Yellow
+XTerm.color12: Blue
+XTerm.color13: Magenta
+XTerm.color14: Cyan
+XTerm.color15: White
+
+! You can specify colors by giving the index (see the above resources)
+!XTerm*foreground:	7
+!XTerm*background:	0
+!XTerm*cursorColor:	11
+! I'm affraid that color indices work only for rxvt
+XTerm*foreground:	Gray90
+XTerm*background:	Black
+XTerm*cursorColor:	Yellow
+XTerm*cursorBlink:	on
+
+! Use these for bold and underline
+XTerm*vt100.colorBD: White
+XTerm*vt100.colorUL: Yellow3
+XTerm*vt100.colorULMode: on
+XTerm*scrollbar.background:	#505050
+! For rxvt colorUL is not under vt100 class
+Rxvt.colorUL: Yellow3
+
+*SimpleMenu.background:	#00aaff
+*SimpleMenu*foreground:	Black
+
+*numeric:		C
+*displayLang:		pl_PL
+*basicLocale:		pl_PL
+*timeFormat:		C
+*inputLang:		pl_PL
+
+! My understanding of ptyInitialErase is that with it being set the
+! xterm will look into pseudo-terminal description (instead of its own
+! database) to figure out what should be sent on backspace/backarrow
+! key.
+XTerm.ptyInitialErase:		true
+
+! This ties the vt100.backarrowKey with ptyInitialErase
+XTerm.backarrowKeyIsErase:	true
+! Not set explicitly but implictly through backarrowKeyIsErase
+!*vt100.backarrowKey:	false
+
+! Send escape sequence instead of DEL character for the Delete key
+XTerm.deleteIsDEL:		false
+
+*vt100.eightBitInput: 	true
+*vt100.metaSendsEscape:	true
+
+! I'm sticking with the Linux like convention of ^? for Backspace
+Rxvt.backspacekey:	\177
+Rxvt.background:	Black
+
+! These translations are to protect me from some malicious admins that
+! change the default bindings for these keys. `!' in front of modifier
+! means that only this modifier is allowed, `~' means that this modifier
+! is excluded, I've seen also `@' but don't know what it is for :P
+! TODO: Experiment with
+!       ~Meta<KeyPress>:insert-seven-bit() \n\
+!       Meta<KeyPress>:insert-eight-bit() \n\
+*VT100.Translations:	#override \
+        Shift <Key> Prior: scroll-back(1,page)\n\
+        Shift <Key> Next: scroll-forw(1,page)\n\
+        !Shift <Key> Insert: insert-selection(PRIMARY, CUT_BUFFER0) \n\
+	<KeyPress> Home: string(\033[7~) \n\
+	<KeyPress> End: string(\033[8~) \n\
+	<KeyPress> Delete: string(\033[3~) \n\
+	!<KeyPress> BackSpace: string(0x7F) \n\
+        <KeyPress> Prior: string(\033[5~)\n\
+        <KeyPress> Next: string(\033[6~)\n

@@ -1,0 +1,219 @@
+# Xterm terminfo description - if the default definition does not work
+# try this one :).  Improvements are highly welcome: andrzej.ostruszka@gmail.com
+xterm|X11 terminal emulator,
+# terminal has automatic margins
+	am,
+# background color erase
+	bce,
+# has meta key
+	km,
+# safe to move while in insert mode
+	mir,
+# safe to move while in standout mode
+	msgr,
+# newline after am wrap are ignored
+	xenl,
+# max number of colors on screen
+	colors#8,
+# number of columns in a line
+	cols#80,
+# initial tabs at # chars
+	it#8,
+# number of lines on screen or page
+	lines#50,
+# number of color pairs (we are not HP so 8*8)
+	pairs#64,
+# graphics charset pairs
+	acsc=``aaffggiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz{{||}}~~,
+# audible signal
+	bel=^G,
+# turn on blink/bold
+	blink=\E[5m,
+	bold=\E[1m,
+# back tab
+	cbt=\E[Z,
+# make cursor invisible
+	civis=\E[?25l,
+# clear screen and home cursor
+	clear=\E[H\E[2J,
+# make cursor normal
+	cnorm=\E[?12l\E[?25h,
+# carriage return
+	cr=\r,
+# change region to lines p1 to p2
+	csr=\E[%i%p1%d;%p2%dr,
+# move p1/1 chars to the left
+	cub=\E[%p1%dD,
+	cub1=\b,
+# ... for down
+	cud=\E[%p1%dB,
+	cud1=\n,
+# ... for right
+	cuf=\E[%p1%dC,
+	cuf1=\E[C,
+# ... for up
+	cuu=\E[%p1%dA,
+	cuu1=\E[A,
+# move to row p1 col p2
+	cup=\E[%i%p1%d;%p2%dH,
+# make cursor very visible
+	cvvis=\E[?12;25h,
+# delete p1/1 chars
+	dch=\E[%p1%dP,
+	dch1=\E[P,
+# delete p1/1 lines
+	dl=\E[%p1%dM,
+	dl1=\E[M,
+# erase p1 chars
+	ech=\E[%p1%dX,
+# clear to the end of screen
+	ed=\E[J,
+# clear to the end of line
+	el=\E[K,
+# clear to the beginning of line
+#	el1=\E[1K$<3>,
+	el1=\E[1K,
+# enable alternate character set
+	enacs=\E(B\E)0,
+# "visible bell"
+#	flash=\E[?5h$<100/>\E[?5l,
+# home cursor
+	home=\E[H,
+# horizontal/vertical position p1 (absolute) - this gives problems on
+# solaris
+#	hpa=\E[%i%p1%dG,
+#	vpa=\E[%i%p1%dd,
+# tab (to next 8-space hardware tab stop)
+	ht=\t,
+# set a tab in every row in current column
+	hts=\EH,
+# insert p1/1 chars
+	ich=\E[%p1%d@,
+	ich1=\E[@,
+# insert p1/1 lines
+	il=\E[%p1%dL,
+	il1=\E[L,
+# scroll text up
+	ind=\n,
+# scroll forward p1 lines
+	indn=\E[%p1%dS,
+# turn on blank mode (invisible chars)
+	invis=\E[8m,
+# initialization string
+#	is2=\E[!p\E[?3;4l\E[4l\E>,
+# shifted delete key
+	kDC=\E[3;2~,
+# ... end
+	kEND=\E[1;2F,
+# ... home
+	kHOM=\E[1;2H,
+# ... insert char
+	kIC=\E[2;2~,
+# ... left arrow key
+	kLFT=\E[1;2D,
+# ... next
+	kNXT=\E[6;2~,
+# ... previous
+	kPRV=\E[5;2~,
+# ... right arrow key
+	kRIT=\E[1;2C,
+# backspace key
+	kbs=^?,
+# back tab key
+	kcbt=\E[Z,
+# arrows keys: left
+	kcub1=\EOD,
+# down
+	kcud1=\EOB,
+# right
+	kcuf1=\EOC,
+# up
+	kcuu1=\EOA,
+# delete key
+	kdch1=\E[3~,
+# end key
+	kend=\E[8~,
+# enter/send key
+	kent=\EOM,
+# function keys
+	kf1=\EOP,
+	kf10=\E[21~,
+	kf11=\E[23~,
+	kf12=\E[24~,
+	kf2=\EOQ,
+	kf3=\EOR,
+	kf4=\EOS,
+	kf5=\E[15~,
+	kf6=\E[17~,
+	kf7=\E[18~,
+	kf8=\E[19~,
+	kf9=\E[20~,
+# home key
+	khome=\E[7~,
+# insert char key
+	kich1=\E[2~,
+# mouse event has occured
+	kmous=\E[M,
+# next page
+	knp=\E[6~,
+# previous page
+	kpp=\E[5~,
+# original pair (forground and background to defaults)
+	op=\E[39;49m,
+# restore cursor to last safe_cursor
+	rc=\E8,
+# turn on reverse video mode
+	rev=\E[7m,
+# scroll text down
+	ri=\EM,
+# scroll back p1 lines
+	rin=\E[%p1%dT,
+# end alternate character set
+	rmacs=^O,
+# turn off automatic margins
+	rmam=\E[?7l,
+# turn off cup mode
+	rmcup=\E[?1049l,
+# exit insert mode
+	rmir=\E[4l,
+# turn off keypad transmit mode
+	rmkx=\E[?1l\E>,
+# exit standout mode
+#	rmso=\E[27m,
+	rmso=\E[m,
+# exit underline mode
+#	rmul=\E[24m,
+	rmul=\E[m,
+# reset string
+	rs1=\Ec,
+	rs2=\E[!p\E[?3;4l\E[4l\E>,
+# save current cursor position
+	sc=\E7,
+# set background/forground to p1 (using ANSI escape)
+	setab=\E[4%p1%dm,
+	setaf=\E[3%p1%dm,
+# set background/forground
+	setb=\E[4%?%p1%{1}%=%t4%e%p1%{3}%=%t6%e%p1%{4}%=%t1%e%p1%{6}%=%t3%e%p1%d%;m,
+	setf=\E[3%?%p1%{1}%=%t4%e%p1%{3}%=%t6%e%p1%{4}%=%t1%e%p1%{6}%=%t3%e%p1%d%;m,
+# define video attributes (p1 - p9)
+#	sgr=\E[0%?%p1%p6%|%t;1%;%?%p2%t;4%;%?%p1%p3%|%t;7%;%?%p4%t;5%;m%?%p9%t^N%e^O%;,
+	sgr=\E[0%?%p6%t;1%;%?%p2%t;4%;%?%p1%p3%|%t;7%;%?%p4%t;5%;%?%p7%t;8%;m%?%p9%t^N%e^O%;,
+# turn off all attributes
+#	sgr0=\E[m^O,
+	sgr0=\E[m,
+# start alternate character set
+	smacs=^N,
+# turn on automatic margins
+	smam=\E[?7h,
+# turn on cup mode
+	smcup=\E[?1049h,
+# turn on insert mode
+	smir=\E[4h,
+# turn on keypad transmit mode
+	smkx=\E[?1h\E=,
+# begin standout mode
+	smso=\E[7m,
+# begin underline mode
+	smul=\E[4m,
+# clear all tab stops
+	tbc=\E[3g,

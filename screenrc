@@ -1,0 +1,15 @@
+term xterm
+# ^A is a vim command that I'm sometimes using
+escape ^Ss
+# These are more vim style bindings
+bind j focus down
+bind k focus up
+bind t focus top
+bind b focus bottom
+# Equivalents of CTRL-W o and CTRL-W c from vim (screen is still
+# available under "escape"_CTRL-C)
+bind o only
+bind c remove
+# Default hardstatus line should be title of the window
+defhstatus "^Et"
+caption always '%-Lw%?%F%{.kG}%:%{.kw}%? %n%f %t %{-}%+Lw'

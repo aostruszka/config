@@ -1,0 +1,124 @@
+# Author: Andrzej M. Ostruszka
+# Last modified: Wed Sep 08, 09:20 (2004)
+
+# In all programs, all terminals, make sure this is bound.
+"\C-x\C-r": re-read-init-file
+
+# If ambiguous show completions right away
+set show-all-if-ambiguous on
+# and indicate their type (just like ls -F)
+set visible-stats on
+
+# I like visible bell everywhere apart from Mutt.  Right now it does not
+# work since Mutt is not using readline - but one day maybe :)
+$if Mutt
+  set bell-style audible
+$else
+  set bell-style visible
+$endif
+
+# I prefer to see the whole command line all the time (instead of
+# scrolling it horizontally)
+set horizontal-scroll-mode off
+
+# Allow for 8bit characters
+set input-meta on
+# Convert them to prefix-meta sequences
+set convert-meta on
+# and display them in such way
+set output-meta off
+
+# Arrow keys. Most terminals use these arrow-key codes.
+"\e[A": previous-history
+"\e[B": next-history
+"\e[C": forward-char
+"\e[D": backward-char
+
+# alternate arrow keys (VT100 application-keypad mode)
+#
+#"\eOA": previous-history
+#"\eOB": next-history
+#"\eOC": forward-char
+#"\eOD": backward-char
+
+# Home and End keys for cygwin
+$if term=cygwin
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+$else
+"\e[7~": beginning-of-line
+"\e[8~": end-of-line
+$endif
+# Delete key
+"\e[3~": delete-char
+
+# Some AMO preffered bindings :)
+"\M-p": history-search-backward
+"\M-n": history-search-forward
+"\C-x\M-p": non-incremental-reverse-search-history
+"\C-x\M-n": non-incremental-forward-search-history
+"\C-u": kill-whole-line
+"\C-x\C-h": backward-kill-line
+
+# Hp terminals (and some others) have ugly default behaviour for C-h.
+#"\C-h": backward-delete-char
+#"\e\C-h": backward-kill-word
+
+# Under Xterm in Bash, we bind local Function keys to do something useful.
+#$if Bash
+#"\e[11~": "Function Key 1"
+#"\e[12~": "Function Key 2"
+#"\e[13~": "Function Key 3"
+#"\e[14~": "Function Key 4"
+#"\e[15~": "Function Key 5"
+#
+## I know the following escape sequence numbers are 1 greater than
+## the function key.  Don't ask me why, I didn't design the xterm terminal.
+#"\e[17~": "Function Key 6"
+#"\e[18~": "Function Key 7"
+#"\e[19~": "Function Key 8"
+#"\e[20~": "Function Key 9"
+#"\e[21~": "Function Key 10"
+#$endif
+
+# For Bash, all terminals, add some Bash specific hacks.
+$if Bash
+     # prepare to type a quoted word -- insert open and close double quotes
+     # and move to just after the open quote
+     "\C-x\"": "\"\"\C-b"
+
+     # insert a backslash (testing backslash escapes in sequences and macros)
+     "\C-x\\": "\\"
+
+     # Quote the current or previous word
+     "\C-xq": "\eb\"\ef\""
+
+     # Add a binding to refresh the line, which is unbound
+     "\C-xr": redraw-current-line
+
+     # Edit variable on current line.
+     "\M-\C-v": "\C-a\C-k$\C-y\M-\C-e\C-a\C-y="
+
+    # Expand variables (used e.g. by the mapping for path - below)
+    "\C-x\C-e": shell-expand-line
+
+    # Here is one for editing my path.
+    "\C-xp": "$PATH\C-x\C-e\C-aPATH=\"\C-e:\"\C-b"
+
+    # Shortcut for fast starting of mail agent.
+    "\C-x\C-m": "mutt\C-j"
+
+    # Others
+    "\C-xd": dump-functions
+    "\el": clear-screen
+    "\ek": kill-line
+    "\eu": undo
+    "\C-xv": show-bash-version
+$endif
+
+# For FTP, different hacks:
+$if Ftp
+    "\C-xg": "get \M-?"
+    "\C-xt": "put \M-?"
+    "\M-.": yank-last-arg
+$endif

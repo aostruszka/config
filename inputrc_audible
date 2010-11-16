@@ -1,0 +1,3 @@
+$include ~/.inputrc
+
+set bell-style audible

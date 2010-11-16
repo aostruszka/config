@@ -1,0 +1,37 @@
+map < gT
+map > gt
+
+map gm :tabopen http://mail.google.com/<CR>
+map gc :tabopen http://calendar.google.com/<CR>
+map gr :open http://reader.google.com/<CR>
+
+" This is for Google Bookmarks.  Here's the "original" version
+"javascript:(function(){
+"  var a=window,b=document,c=encodeURIComponent,
+"  d=a.open("http://www.google.com/bookmarks/mark?
+"    op=edit&output=popup&bkmk="+c(b.location)+
+"    "&title="+c(b.title),"bkmk_popup",
+"    "left="+((a.screenX||a.screenLeft)+10)+",
+"    top="+((a.screenY||a.screenTop)+10)+",height=420px,width=550px,
+"    resizable=1,alwaysRaised=1");
+"    a.setTimeout(function(){d.focus()},300)})();
+"
+" And here are the options that I've found on the web (with no explanation):
+"
+"http://www.google.com/bookmarks/mark?
+"	op=add&
+"	   edit
+"	   upload_selected
+"	output=popup&	<- Will open simple page without labels on left
+"	bkmk=!url!&
+"	title=!title!&
+"	labels=!tags!&
+"	   comma separated list
+"	annotation=!notes!
+
+"map gb :javascript window.openNewTabWith(...
+map gb :javascript loadURI("http://www.google.com/bookmarks/mark?op=edit&bkmk="+encodeURIComponent(buffer.URL)+"&title="+buffer.title)<CR>
+
+set nextpattern+=\\bnastępn[yiae]\\b
+set previouspattern+=\\bpoprzedni(|[ea])\\b
+set wildmode=list:longest,list:full

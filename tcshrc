@@ -1,0 +1,50 @@
+# Author: Andrzej M. Ostruszka
+# $Id: tcshrc 36 2006-06-23 10:30:25Z aao014 $
+#
+# This initialization file is for those who from various reasons cannot change
+# their default shell to a reasonable one.  I needed this cause at my work they
+# made a brain dead decision
+#      (see http://www.faqs.org/faqs/unix-faq/shell/csh-whynot/
+#       for more info - some things listed there are fixed in tcsh but
+#       the main point still holds)
+# to have tcsh as a default shell and it is a problem to have bash in
+# your passwd entry (I was not able for example to use ftp :(( - probably
+# missing entry in /etc/shells or something).
+#
+# So I make use of the settings done in tcsh startup files and switch right away
+# to zsh/bash :)).  This make it the most useful tcshrc ever :))).  Feel free to use
+# it  -- if you're newbie then do yourself a favour and take a look at
+# http://www.zsh.org/ 
+# or (in case you prefer bash)
+# http://www.gnu.org/software/bash/manual/bash.html
+# and
+# http://www.caliban.org/bash/
+
+# The fist version had no checks at all which caused zsh/bash invocation when
+# I typed 'tcsh' in the prompt line - not a bad thing :), but somehow I'm fond
+# of an idea of having a freedom of shooting into my foot when I want to :P
+
+if ($?prompt && ! $?I_WANT_TCSH) then
+  foreach shell_ ($HOME/localroot/usr/bin/zsh $HOME/localroot/usr/bin/bash /usr/local/bin/bash /usr/bin/bash /bin/bash)
+    if ( -x $shell_ ) then # I don't know how to make these work in one 'if'
+      set version_=`$shell_ --version`
+      switch ( "$version_" )
+	case "zsh 4.*":
+	case "*bash, version\ 3.0*":
+	case "*bash, version\ 2.05b*":
+	  setenv SHELL $shell_
+	  break	# out of foreach loop! (breaksw is for switch)
+      endsw
+    endif
+  end
+  # This is a workaround.  Sometimes the settings done in initialization
+  # scripts for tcsh gets overwritten by unmaintaned system zsh/bash
+  # initialization files (like /etc/z?profile).  So I'm not using the --login
+  # option and flag via env var that user login files needs to be loaded.
+  if ($?loginsh) then
+    setenv load_user_profile_ "true"
+  endif
+  exec $SHELL
+endif
+
+# vim: set sw=2 tw=80:

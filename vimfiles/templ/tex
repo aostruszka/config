@@ -1,0 +1,10 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[latin2]{inputenc}
+\pagestyle{empty}
+\nofiles
+
+\begin{document}
+
+\end{document}
