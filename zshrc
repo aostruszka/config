@@ -67,11 +67,13 @@ if [[ -o interactive ]]; then	# if shell is interactive
   # Left/Right arrows
   [ -n $terminfo[kcuf1] ] && bindkey -M emacs $terminfo[kcuf1] forward-char
   [ -n $terminfo[kcub1] ] && bindkey -M emacs $terminfo[kcub1] backward-char
+
   # By default the \M-p and \M-n search backward and forward with only first
   # word in line (history-search-forward/backward widgets) but I prefer to
   # search for lines beginning with the current line up to the cursor.
   bindkey -M emacs '^[p' history-beginning-search-backward
   bindkey -M emacs '^[n' history-beginning-search-forward
+
   # But these first word searches can be useful so I bound them to the Up/Down
   # arrow keys - by default they are bound to up/down-line-or-history but this
   # functions are also bound to ^P/^N which are more convenient for me (I'm
@@ -139,6 +141,10 @@ if [[ -o interactive ]]; then	# if shell is interactive
   # These commands I'm so used to that I want them available also in viins
   bindkey -M viins '^[p' history-beginning-search-backward
   bindkey -M viins '^[n' history-beginning-search-forward
+  # These two are also handy but I change default binding
+  bindkey -M viins '^[P' _history-complete-older
+  bindkey -M viins '^[N' _history-complete-newer
+
   # This one is sometimes handy so I bind it too
   bindkey -M viins '^[q' push-line
 
