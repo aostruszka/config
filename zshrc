@@ -360,6 +360,17 @@ compinit
       # expansion is done very early - after history expansion which is done
       # first)
       compdef _files \cygrun cygstart
+      # Default mount poing in cygwin is /cygdrive but I prefer /win, however
+      # sometimes people take it for granted that it is /cygdrive so I have this
+      # convenient toggle
+      toggle_mount() {
+	case $(mount -p) in
+	  */win*) mount -c /cygdrive && cd ${$(pwd)/win/cygdrive}
+	    ;;
+	  */cygdrive*) mount -c /win && cd ${$(pwd)/cygdrive/win}
+	    ;;
+	esac
+      }
       # Somehow I have problems with borders in mc under cygwin so I use ascii
       if type -w mc > /dev/null; then alias mc='\mc -a -d -c'; fi
       ;;
