@@ -1,0 +1,26 @@
+[core]
+	pager="less -FRX"
+	excludesfile="/home/andrzej/.gitignore"
+[user]
+	name = Andrzej Ostruszka
+	email = andrzej.ostruszka@gmail.com
+[color]
+	diff = auto
+[alias]
+	aliases = config --get-regexp alias.
+	ci = commit
+	co = checkout
+	s  = status
+	b  = branch
+	d  = diff
+	l  = log --pretty=format:\"%Cgreen%h%Creset %s\"
+	sl = stash list
+	st = stash save
+	ss = stash show
+	sa = stash apply
+	sp = stash pop
+[gui]
+	fontdiff = -family \"Courier New\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+	encoding = iso8859-1
+[rerere]
+	enabled = 1

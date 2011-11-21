@@ -1,0 +1,10 @@
+core
+Session.vim
+.*.swp
+tags
+*~
+*.o
+*.exe
+*.exe.stackdump
+*.vpj
+*.cm[oxi]
