@@ -65,10 +65,6 @@ unset f
 # If ~/bin exist then prepend it to the PATH
 [[ -d $HOME/bin ]] && PATH=$HOME/bin:$PATH
 
-# Version control systems I use
-[[ -d $HOME/CVS ]] && export CVSROOT=$HOME/CVS
-[[ -d $HOME/SVN ]] && export SVNREPO=file://$HOME/SVN
-
 if [[ -d $HOME/tmp ]]; then
     TMP=$HOME/tmp
     TEMP=$TMP
@@ -91,7 +87,7 @@ export EDITOR=vim
 
 PAGER=less
 LESS=S	# I prefer to see lines not wrapped.  This also protects me from some
-	# admin that sets this variable (ones it happened that he/she had set it
+	# admin that sets this variable (once it happened that he/she had set it
 	# to include x2 - one of the easiest ways to make me upset is to not
 	# treat tab as 8 spaces :))
 

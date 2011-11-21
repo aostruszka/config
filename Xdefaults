@@ -1,5 +1,5 @@
 ! Author: Andrzej M. Ostruszka
-! Last modified:  Wed Jan 07, 23:52 (2009)
+! Last modified:  Mon Oct 10, 11:19 (2011)
 ! Cygwin (rxvt) settings
 ! You can freely use it for your own purposes
 
@@ -114,7 +114,7 @@ Rxvt.background:	Black
 ! TODO: Experiment with
 !       ~Meta<KeyPress>:insert-seven-bit() \n\
 !       Meta<KeyPress>:insert-eight-bit() \n\
-*VT100.Translations:	#override \
+*VT100.Translations:	#override \n\
         Shift <Key> Prior: scroll-back(1,page)\n\
         Shift <Key> Next: scroll-forw(1,page)\n\
         !Shift <Key> Insert: insert-selection(PRIMARY, CUT_BUFFER0) \n\
