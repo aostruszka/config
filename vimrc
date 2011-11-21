@@ -125,7 +125,7 @@ if has("gui_running")
   if has("unix")
     if has("gui_gtk2")
       " It seems that in GTK2 this is equivalent of the below lengthy font name
-      set guifont=Fixed\ 14
+      set guifont=Fixed\ 11,Mono\ 12
     else
       set guifont=-misc-fixed-medium-r-normal-*-*-140-*-*-c-*-iso8859-2
     endif

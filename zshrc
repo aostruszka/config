@@ -315,24 +315,15 @@ compinit
 
   case $OSTYPE in
     *linux*)	# Linux specific aliases
-      if [ -d /media/cdrom ]; then
-	cd_dir_=/media/cdrom
-	pen_dir_=/media/pen
-      else
-	cd_dir_=/mnt/cdrom
-	pen_dir_=/mnt/pen
-      fi
-      alias mcd="mount $cd_dir_"
-      alias ucd="umount $cd_dir_"
-      alias mpen="mount $pen_dir_"
-      alias upen="umount $pen_dir_"
-      unset cd_dir_ pen_dir_
       # Switching codes for LAT1_MAP and USER_MAP from
       # /usr/src/linux/Documentation/unicode.txt (in my case USER_MAP is
       # iso8859-2 but I'm mainly using only polish diacritical characters thus
       # the 'pl' prefix in alias :))
       alias plfont="echo -ne '\033(K'"
       alias usfont="echo -ne '\033(B'"
+      # This one is inspired by cygwin's cygrun alias (I got used to it
+      # so much that I had to find linux equivalent :D)
+      if type -w xdg-open > /dev/null; then alias xo=xdg-open; fi
       ;;
     *cygwin*)
       # On windows I sometimes don't start X server and use this alias
@@ -356,6 +347,7 @@ compinit
       # another ones specific for windows :) - open the specified
       # document/link/... in Windows registered application
       alias cygrun='cygstart --showmaximized'
+      alias xo=cygrun
       # Complete files for these two (I need to quote cygrun cause alias
       # expansion is done very early - after history expansion which is done
       # first)
