@@ -227,6 +227,9 @@ iab dmY <C-R>=strftime("%d.%m.%Y")<CR>
 
 " =============== AUTOCOMMANDS ===============
 if has("autocmd")
+  " See https://github.com/tpope/vim-pathogen
+  call pathogen#infect()
+
   filetype plugin indent on
 
   " When editing a file, always jump to the last known cursor position.
