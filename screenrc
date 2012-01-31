@@ -12,4 +12,6 @@ bind o only
 bind c remove
 # Default hardstatus line should be title of the window
 defhstatus "^Et"
+# By default keep that much of scroll history
+defscrollback 1024
 caption always '%-Lw%?%F%{.kG}%:%{.kw}%? %n%f %t %{-}%+Lw'
