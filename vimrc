@@ -107,19 +107,6 @@ endif
 
 " -----------------------------------------------------------------
 
-" Syntax highlighting stuff
-if &t_Co > 2 || has("gui_running")
-  set background=dark		" I always use black background :))
-  let c_space_errors=1
-  syntax on
-  " This command highlights any part sticking out beyond 'tw'.  You can clear it
-  " with :match none
-  command! RightMargin if &tw>0 | exe 'match NonText /.\%>'. &tw .'v./' | end
-
-  " I often use these in "normal text files"
-  command! Fixme syn keyword Todo TODO FIXME NOTE XXX contained
-endif
-
 " GUI specific stuff (I don't use .gvimrc)
 if has("gui_running")
   if has("unix")
@@ -231,6 +218,20 @@ if has("autocmd")
   call pathogen#infect()
 
   filetype plugin indent on
+
+  " Syntax highlighting stuff - done here since "syntax on" also invokes
+  " filetype and I want that done after pathogen has modified runpath
+  if &t_Co > 2 || has("gui_running")
+    set background=dark		" I always use black background :))
+    let c_space_errors=1
+    syntax on
+    " This command highlights any part sticking out beyond 'tw'.  You can clear it
+    " with :match none
+    command! RightMargin if &tw>0 | exe 'match NonText /.\%>'. &tw .'v./' | end
+
+    " I often use these in "normal text files"
+    command! Fixme syn keyword Todo TODO FIXME NOTE XXX contained
+  endif
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
