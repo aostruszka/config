@@ -24,3 +24,5 @@
 	encoding = iso8859-1
 [rerere]
 	enabled = 1
+[diff]
+	mnemonicprefix = true
