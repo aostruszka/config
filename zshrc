@@ -354,7 +354,7 @@ compinit
       # Complete files for these two (I need to quote cygrun cause alias
       # expansion is done very early - after history expansion which is done
       # first)
-      compdef _files \cygrun cygstart
+      compdef _files 'cygrun' cygstart 'xo'
       # Default mount poing in cygwin is /cygdrive but I prefer /win, however
       # sometimes people take it for granted that it is /cygdrive so I have this
       # convenient toggle
