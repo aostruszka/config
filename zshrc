@@ -337,12 +337,15 @@ compinit
       runx_multi() {
 	XWin -multiwindow -clipboard -xkbrules xorg -xkbmodel pc104 -xkblayout pl -xkboptions "ctrl:nocaps" &> ~/.xsession-errors &!
 	# Wait until X server starts up
-	until xset q &> /dev/null; do sleep 1; done
-	if [ -d ~/.fonts ]; then
-	  xset +fp $HOME/.fonts
+	if [[ -z $DISPLAY ]]; then
+	  export DISPLAY=:0
 	fi
-	xrdb -DPOLISH_LOCALE=${POLISH_LOCALE:-0} -load $HOME/.Xdefaults
-	xterm &!
+	until xset q &> /dev/null; do sleep 1; done
+        if [ -d ~/.fonts ]; then
+          xset +fp $HOME/.fonts
+        fi
+        xrdb -DPOLISH_LOCALE=${POLISH_LOCALE:-0} -load $HOME/.Xdefaults
+        xterm -ls &!
       }
       # another ones specific for windows :) - open the specified
       # document/link/... in Windows registered application
