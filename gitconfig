@@ -15,8 +15,9 @@
 	d  = diff
 	l  = log --pretty=format:\"%Cgreen%h%Creset %s\"
 	sl = stash list
-	st = stash save
-	ss = stash show
+	ss = stash save
+	# Mnemonic is "stash view"
+	sv = stash show
 	sa = stash apply
 	sp = stash pop
 [gui]
