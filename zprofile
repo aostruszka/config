@@ -23,8 +23,6 @@ case $OSTYPE in
     if [[ -d /home/$(id -un) ]]; then
       HOME=/home/$(id -un)
     fi
-    # This seems to be needed for proper running of TclTk
-    export TCL_LIBRARY="c:/cygwin/usr/share/tcl8.4"
     ;;
   *linux*)
     # Sometimes the path is screwed up on linux :) so I set
