@@ -109,14 +109,15 @@ if [ $? == 0 ]; then # if success
 else
     if type -t perl > /dev/null; then	# if perl in path
 	locale_=$(perl <<-'LOCALE_TEST_'
-	    use POSIX qw(locale_h);
-	    for my $l (("polish", "pl_PL", "pl", "C")) {
-		if (setlocale(LC_CTYPE, $l) && setlocale(LC_COLLATE, $l)) {
+		use POSIX qw(locale_h);
+		for my $l (("polish", "pl_PL", "pl", "C")) {
+		  if (setlocale(LC_CTYPE, $l) && setlocale(LC_COLLATE, $l)) {
 		    print $l;
 		    exit 0;
+		  }
 		}
-	    }
-	    LOCALE_TEST_)
+		LOCALE_TEST_
+		)
     elif type -p locale > /dev/null; then # if we got 'locale' executable
 	locale_=$(locale -a | grep ^pl | head -1)
     else
