@@ -1,0 +1,8 @@
+#. $HOME/.zprofile
+if [ -d ~/.fonts ]
+then
+  xset +fp $HOME/.fonts
+fi
+xrdb -DPOLISH_LOCALE=${POLISH_LOCALE:-0} -load $HOME/.Xdefaults
+eval $(ssh-agent)
+xterm -ls &
