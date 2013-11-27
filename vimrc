@@ -112,7 +112,7 @@ if has("gui_running")
   if has("unix")
     if has("gui_gtk2")
       " It seems that in GTK2 this is equivalent of the below lengthy font name
-      set guifont=Fixed\ 11,Mono\ 12
+      set guifont=Mono\ 10,Fixed\ 11
     else
       set guifont=-misc-fixed-medium-r-normal-*-*-140-*-*-c-*-iso8859-2
     endif
@@ -215,7 +215,9 @@ iab dmY <C-R>=strftime("%d.%m.%Y")<CR>
 " =============== AUTOCOMMANDS ===============
 if has("autocmd")
   " See https://github.com/tpope/vim-pathogen
-  call pathogen#infect()
+  if exists("*pathogen#infect") || !empty(findfile("pathogen.vim", $HOME . "/.vim/**"))
+    call pathogen#infect()
+  endif
 
   filetype plugin indent on
 
