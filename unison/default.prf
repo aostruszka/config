@@ -15,4 +15,5 @@ ignore = Name core
 ignore = Name tags
 ignore = Name *.d
 ignore = Name *.a
+ignore = Name *.oct
 ignore = Name dupa.*

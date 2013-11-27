@@ -27,3 +27,5 @@
 	enabled = 1
 [diff]
 	mnemonicprefix = true
+[push]
+	default = simple

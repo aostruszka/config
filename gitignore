@@ -5,6 +5,8 @@ tags
 *~
 *.o
 *.exe
+*.oct
 *.exe.stackdump
+*.pro.user
 *.vpj
 *.cm[oxi]
