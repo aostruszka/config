@@ -25,14 +25,15 @@ case $OSTYPE in
     fi
     ;;
   *linux*)
-    # Sometimes the path is screwed up on linux :) so I set
-    # a reasonable value by myself
-    if [[ $(id -un) == root ]]; then
-      path=(/usr/local/sbin /usr/local/bin /sbin /bin
-	    /usr/sbin /usr/bin /usr/X11R6/bin)
-    else
-      PATH=/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin
-    fi
+    # These days it seems to be no problem but older distributions and/or
+    # hosts over which I have no control can sometimes have the path screwed
+    # up so below is a reasonable value to be used
+    #if [[ $(id -un) == root ]]; then
+    #  path=(/usr/local/sbin /usr/local/bin /sbin /bin
+    #        /usr/sbin /usr/bin /usr/X11R6/bin)
+    #else
+    #  PATH=/usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin
+    #fi
     ;;
   *solaris*)
     # Programs in xpg4 are nicer (read more GNU like :)) so I prefer them.
