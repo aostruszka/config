@@ -1,12 +1,12 @@
 core
 Session.vim
-.*.swp
+.*.sw?
 tags
 *~
 *.o
 *.exe
 *.oct
 *.exe.stackdump
-*.pro.user
+*.pro.user*
 *.vpj
 *.cm[oxi]
