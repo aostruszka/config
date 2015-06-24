@@ -1,4 +1,5 @@
 core
+a.out
 Session.vim
 .*.sw?
 tags
@@ -10,3 +11,7 @@ tags
 *.pro.user*
 *.vpj
 *.cm[oxi]
+*.autosave
+moc_*.cpp
+.ycm_extra_conf.py*
+compile_commands.json
