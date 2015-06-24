@@ -1,5 +1,4 @@
 " Author: Andrzej M. Ostruszka
-" Last modified:  Wed Jun 24, 13:19 (2009)
 
 setlocal sw=4 tw=80 expandtab
 
@@ -73,6 +72,9 @@ noremap <buffer> <Leader>C [*2x]*h2x
 " standard <Leader>) and `v -> go back to the variable (I could use mark
 " 'd for it but I prefer to leave marks from the beginning of the
 " alphabet intact :)). 
-noremap <buffer> <Leader>d mvgd
+" TODO - clean this up
+" Commenting out for now since I haven't used it for a while and it conflicts
+" with default settings for YouCompleteMe plugin.
+"noremap <buffer> <Leader>d mvgd
 
 " vi: set tw=80:

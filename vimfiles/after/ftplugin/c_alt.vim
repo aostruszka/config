@@ -20,7 +20,7 @@ endfor
 function! s:AltBuf(buf_name, ext)
   for alt_ext in s:ext_map[a:ext]
     let other_buf = bufnr('\C\(^\|/\)' . a:buf_name . alt_ext)
-    if other_buf != -1
+    if other_buf != -1 && buflisted(other_buf)
       return other_buf
     endif
     return -1

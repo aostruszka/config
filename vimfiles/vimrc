@@ -1,6 +1,5 @@
 " Vim startup file by
-" Author: Andrzej M. Ostruszka
-" $Id$
+" Author: Andrzej Ostruszka
 
 if version < 700
   echo "Get a newer vim :)), this startup file probably won't work!"
@@ -69,7 +68,7 @@ set foldminlines=2	" What is the point in having 1 line (default) fold?
 set listchars+=tab:>-	" For 'list' I prefer tabs to be ">-------" than ^I
 set virtualedit=block   " Allow selection of the block beyond the end of lines
 
-if !has("unix")
+if ! has("unix")
   " I use cygwin zsh/bash as a shell so I need to set this
   set shellslash
 endif
@@ -197,13 +196,6 @@ inoremap <C-B> <Left>
 noremap <F1> :help <C-R>=expand('<cWORD>')<CR><CR>
 imap <F1> <C-O><F1>
 
-" <F2> - save (only when modified)
-noremap <F2> :update<CR>
-imap <F2> <C-O><F2>
-
-" <F9> - run make
-nmap <F9> <F2>:make<CR>
-
 " Switching between buffers (<C-N> and <C-P> are valid commands but I'm not
 " using them (I'm using standard vi j,k and cursor keys)
 noremap <C-N> :bn<CR>
@@ -212,84 +204,104 @@ noremap <C-P> :bp<CR>
 " Current date
 iab dmY <C-R>=strftime("%d.%m.%Y")<CR>
 
+" Syntax highlighting stuff
+if &t_Co > 2 || has("gui_running")
+  set background=dark		" I always use black background :))
+  let c_space_errors=1
+  " "syntax on" also invokes filetype and I want that done after plugin-manager
+  " has modified runpath so this one is postponed
+  "syntax on
+
+  " This command highlights any part sticking out beyond 'tw'.  You can clear it
+  " with :match none
+  command! RightMargin if &tw>0 | exe 'match NonText /.\%>'. &tw .'v./' | end
+
+  " I often use these in "normal text files"
+  command! Fixme syn keyword Todo TODO FIXME NOTE XXX contained
+endif
+
 " =============== AUTOCOMMANDS ===============
-if has("autocmd")
-  " See https://github.com/tpope/vim-pathogen
-  if exists("*pathogen#infect") || !empty(findfile("pathogen.vim", $HOME . "/.vim/**"))
-    call pathogen#infect()
+if ! has("autocmd")
+  finish
+endif
+
+if isdirectory(fnamemodify($MYVIMRC,":h")."/bundle/Vundle.vim")
+  filetype off " Required during Vundle configuration
+
+  " set the runtime path to include Vundle and initialize
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
+
+  " let Vundle manage Vundle, required
+  Plugin 'gmarik/Vundle.vim'
+
+  " Couple plugins from GitHub
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'godlygeek/tabular'
+  Plugin 'Valloric/YouCompleteMe'
+
+  " All of your Plugins must be added before the following line
+  call vundle#end()            " required
+endif
+
+filetype plugin indent on
+
+" Now is good time to turn on possibly postponed syntax highlighting
+if &t_Co > 2 || has("gui_running") | syntax on | endif
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+" Automatic 'last modified' time stamp when present in first
+" and last 20 lines
+autocmd BufWritePre,FileWritePre * kt | keepjumps call LastMod() | 't
+function! LastMod()
+  if !&modifiable | return | endif
+  let l = 20
+  if line("$") < 2*l
+    exe "%s/\\(\\A*\\)Last modified:.*/\\1Last modified: "
+      \ strftime("%a %b %d, %H:%M (%Y)") . "/e"
+  else
+    exe "1," . l . "s/\\(\\A*\\)Last modified:.*/\\1Last modified: "
+      \ strftime("%a %b %d, %H:%M (%Y)") . "/e"
+    exe "$-" . l . ",$s/\\(\\A*\\)Last modified:.*/\\1Last modified: "
+      \ strftime("%a %b %d, %H:%M (%Y)") . "/e"
   endif
+  call histdel("/",-1)
+endfun
 
-  filetype plugin indent on
+" I don't want to have separate ftplugin just for one command
+" fo-=l is for 'mail' cause it is set in default ftplugin :(
+autocmd FileType cvs,crontab,mail	setlocal nobackup fo-=l
 
-  " Syntax highlighting stuff - done here since "syntax on" also invokes
-  " filetype and I want that done after pathogen has modified runpath
-  if &t_Co > 2 || has("gui_running")
-    set background=dark		" I always use black background :))
-    let c_space_errors=1
-    syntax on
-    " This command highlights any part sticking out beyond 'tw'.  You can clear it
-    " with :match none
-    command! RightMargin if &tw>0 | exe 'match NonText /.\%>'. &tw .'v./' | end
+" TODO: find some reasonable template system and remove the below
+augroup cprog
+" Remove all cprog autocommands
+au!
+" Use templates for new files
+au BufNewFile main.c	r ~/.vim/templ/main.c|-d
+au BufNewFile *.h		r ~/.vim/templ/c-head|-d|
+        \do FileReadPost c-head
+au FileReadPost c-head exe 'g/<header_file>/s##\U'.expand("%:t:r")
+augroup END
 
-    " I often use these in "normal text files"
-    command! Fixme syn keyword Todo TODO FIXME NOTE XXX contained
-  endif
+augroup tex
+au!
+au BufNewFile *.tex		r ~/.vim/templ/tex|-d
+augroup END
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-      	\ if line("'\"") > 0 && line("'\"") <= line("$") |
-      	\   exe "normal g`\"" |
-      	\ endif
+augroup html
+au!
+au BufNewFile *.html	r ~/.vim/templ/html|-d
+augroup END
 
-  " Automatic 'last modified' time stamp when present in first
-  " and last 20 lines
-  autocmd BufWritePre,FileWritePre * kt | keepjumps call LastMod() | 't
-  function! LastMod()
-    if !&modifiable | return | endif
-    let l = 20
-    if line("$") < 2*l
-      exe "%s/\\(\\A*\\)Last modified:.*/\\1Last modified: "
-        \ strftime("%a %b %d, %H:%M (%Y)") . "/e"
-    else
-      exe "1," . l . "s/\\(\\A*\\)Last modified:.*/\\1Last modified: "
-        \ strftime("%a %b %d, %H:%M (%Y)") . "/e"
-      exe "$-" . l . ",$s/\\(\\A*\\)Last modified:.*/\\1Last modified: "
-        \ strftime("%a %b %d, %H:%M (%Y)") . "/e"
-    endif
-    call histdel("/",-1)
-  endfun
-
-  " I don't want to have separate ftplugin just for one command
-  " fo-=l is for 'mail' cause it is set in default ftplugin :(
-  autocmd FileType cvs,crontab,mail	setlocal nobackup fo-=l
-
-  " TODO: find some reasonable template system and remove the below
-  augroup cprog
-  " Remove all cprog autocommands
-  au!
-  " Use templates for new files
-  au BufNewFile main.c	r ~/.vim/templ/main.c|-d
-  au BufNewFile *.h		r ~/.vim/templ/c-head|-d|
-          \do FileReadPost c-head
-  au FileReadPost c-head exe 'g/<header_file>/s##\U'.expand("%:t:r")
-  augroup END
-
-  augroup tex
-  au!
-  au BufNewFile *.tex		r ~/.vim/templ/tex|-d
-  augroup END
-
-  augroup html
-  au!
-  au BufNewFile *.html	r ~/.vim/templ/html|-d
-  augroup END
-
-  augroup make
-  au!
-  au BufNewFile Makefile	r ~/.vim/templ/make|-d
-  augroup END
-
-endif " has("autocmd")
+augroup make
+au!
+au BufNewFile Makefile	r ~/.vim/templ/make|-d
+augroup END
 " vim: set sw=2 tw=80:
