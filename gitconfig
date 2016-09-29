@@ -20,12 +20,15 @@
 	sv = stash show
 	sa = stash apply
 	sp = stash pop
+	# Mnemonic "publish"
+	pub = push --recurse-submodules=on-demand
 [gui]
 	fontdiff = -family \"Courier New\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
-	encoding = iso8859-1
+	encoding = utf-8
 [rerere]
 	enabled = 1
 [diff]
 	mnemonicprefix = true
+	submodule = log
 [push]
 	default = simple

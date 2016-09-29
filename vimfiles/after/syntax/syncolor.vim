@@ -17,7 +17,7 @@ hi WildMenu	term=standout ctermfg=Black ctermbg=Yellow
 			\ guifg=Black guibg=Orange
 hi DiffChange	term=bold ctermfg=Black ctermbg=DarkYellow
 			\ guibg=DarkOrange
-hi DiffText     term=reverse cterm=bold ctermbg=Red gui=bold guibg=Red guifg=White
+hi DiffText     term=reverse cterm=bold ctermbg=Red ctermfg=White gui=bold guibg=Red guifg=White
 hi Folded	term=standout cterm=bold ctermfg=Cyan ctermbg=Black
 			\ guifg=Cyan guibg=gray20
 

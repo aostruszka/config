@@ -171,7 +171,7 @@ precmd () { vcs_info }
 # to 50 characters and conditional # or $ - depending whether the shell is in
 # privileged mode or not; see "info zsh 'Prompt Expansion'" ). I also show
 # version information if it is available.
-PS1=$'%F{green}%n@%B%m%b %F{yellow}%50<...<%~%<<%f${vcs_info_msg_0_}\n%(!.#.$) '
+PS1=$'%F{green}%n@%B%m%b %F{yellow}%50<...<%~%f${vcs_info_msg_0_}%<<\n%(!.#.$) '
 
 # Completion stuff - I want it two be done before my aliases are defined so that
 # I can define completion for them also

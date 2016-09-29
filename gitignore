@@ -9,6 +9,7 @@ tags
 *.oct
 *.exe.stackdump
 *.pro.user*
+*.creator.user*
 *.vpj
 *.cm[oxi]
 *.autosave
