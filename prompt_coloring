@@ -1,0 +1,50 @@
+# Prompt: To decipher the setting below it probably would be helpful to know
+# that %{ ...%} is the literal escape sequence which I'm using to color up my
+# prompt.  A sequence of non-printing chars and the color description is
+# a composition of one or more of the following codes:
+# Attribute codes:
+# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Color codes:
+# 0=black 1=red 2=green 3=yellow 4=blue 5=magenta 6=cyan 7=white
+# To get foreground/background color add 30/40 (see setaf/setab terminal
+# capabilities - it is not straight forward to decode them since they use
+# parametrized strings.  For my xterm it is:
+# setab=\E[4%p1%dm, setaf=\E[3%p1%dm
+# so it reads for background:
+# - output \E[4
+# - push param1 on stack
+# - print it as int (printf like format)
+# - ouput m
+# and the parameter is just the color number.  Related to this are setf/setb
+# attributes - see 'man terminfo' - they say there that if terminal supports
+# ANSI escape sequence it should be in setaf/setab otherwise it should be in
+# setf/setb and historically arguments for setf/setb correspond to different
+# color mappings (switched blue<->red and yellow<->cyan numbers).  In my xterm
+# setb reads:
+# setb=\E[4%?%p1%{1}%=		# Output \E[4, push p1 on stack, if it equals 1
+#            %t4		# then ouput 4 (blue remapping)
+#            %e%p1%{3}%=	# elseif it equals 3
+#              %t6		# then output 6 (cyan remapping)
+#              %e%p1%{4}%=	# elsif it equals 4
+#                %t1		# then output 1 (red remapping)
+#                %e%p1%{6}%=	# elseif it equals 6
+#                  %t3		# then output 3 (yellow remapping)
+#                  %e%p1%d%;m	# else output is as %d and 'm'
+#
+# Example: echo -e '\e[04;33;41m  FAILURE  \e[0m' should print an underlined
+# yellow text on a red background.  You can combine the attributes like:
+# echo -e '\e[01;05;36;44m  FAILURE  \e[0m' which should give a bold, blinking
+# cyan text on a blue background.
+#
+# Whether terminal supports given attribute or not is another issue :))
+#
+# Related to the above are XTerm.color0 to XTerm.color15 resources where you
+# can say what exactly you mean by e.g. bold/bright red -> XTerm.color9
+# (think in octal - bold being 010 :))
+#
+# Somehow I like the default setting of bash prompt in cygwin (without
+# the title bar part) so I modified it a bit to suit my taste and made
+# use of couple nice zsh features :) (like truncation of the current directory
+# to 50 characters and conditional # or $ - depending whether the shell is in
+# privileged mode or not; see "info zsh 'Prompt Expansion'" ).
+PS1=$'%{\e[32m%}%n@%{\e[1;32m%}%m %{\e[0;33m%}%50<...<%~%<<%{\e[0m%}\n%(!.#.$) '

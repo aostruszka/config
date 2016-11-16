@@ -1,0 +1,1 @@
+setl spell spelllang=en
