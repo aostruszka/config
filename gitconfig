@@ -25,10 +25,12 @@
 [gui]
 	fontdiff = -family \"Courier New\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
 	encoding = utf-8
+	warndetachedcommit = true
 [rerere]
 	enabled = 1
 [diff]
 	mnemonicprefix = true
 	submodule = log
+	renames = true
 [push]
 	default = simple

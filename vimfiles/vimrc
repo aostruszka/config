@@ -246,6 +246,10 @@ if ! empty(vundle_dir)
   Plugin 'tpope/vim-fugitive'
   Plugin 'godlygeek/tabular'
   Plugin 'Valloric/YouCompleteMe'
+  Plugin 'vim-airline/vim-airline'
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'scrooloose/nerdcommenter'
+  Plugin 'terryma/vim-multiple-cursors'
 
   " All of your Plugins must be added before the following line
   call vundle#end()            " required
@@ -266,18 +270,19 @@ autocmd BufReadPost *
     \ endif
 
 " Automatic 'last modified' time stamp when present in first
-" and last 20 lines
+" and last 20 lines (below in pattern matching $ is split from 'Last modified'
+" to prevent this function from corrupting its definition :))
 autocmd BufWritePre,FileWritePre * kt | keepjumps call LastMod() | 't
 function! LastMod()
   if !&modifiable | return | endif
   let l = 20
   if line("$") < 2*l
-    exe "%s/\\(\\A*\\)Last modified:.*/\\1Last modified: "
+    exe "%s/\$" . "Last modified: \\zs.*/"
       \ strftime("%a %b %d, %H:%M (%Y)") . "/e"
   else
-    exe "1," . l . "s/\\(\\A*\\)Last modified:.*/\\1Last modified: "
+    exe "1," . l . "s/\$" . "Last modified: \\zs.*/"
       \ strftime("%a %b %d, %H:%M (%Y)") . "/e"
-    exe "$-" . l . ",$s/\\(\\A*\\)Last modified:.*/\\1Last modified: "
+    exe "$-" . l . ",$s/\$" . "Last modified: \\zs.*/"
       \ strftime("%a %b %d, %H:%M (%Y)") . "/e"
   endif
   call histdel("/",-1)
@@ -287,29 +292,4 @@ endfun
 " fo-=l is for 'mail' cause it is set in default ftplugin :(
 autocmd FileType cvs,crontab,mail	setlocal nobackup fo-=l
 
-" TODO: find some reasonable template system and remove the below
-augroup cprog
-" Remove all cprog autocommands
-au!
-" Use templates for new files
-au BufNewFile main.c	r ~/.vim/templ/main.c|-d
-au BufNewFile *.h		r ~/.vim/templ/c-head|-d|
-        \do FileReadPost c-head
-au FileReadPost c-head exe 'g/<header_file>/s##\U'.expand("%:t:r")
-augroup END
-
-augroup tex
-au!
-au BufNewFile *.tex		r ~/.vim/templ/tex|-d
-augroup END
-
-augroup html
-au!
-au BufNewFile *.html	r ~/.vim/templ/html|-d
-augroup END
-
-augroup make
-au!
-au BufNewFile Makefile	r ~/.vim/templ/make|-d
-augroup END
 " vim: set sw=2 tw=80:

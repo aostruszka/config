@@ -65,10 +65,10 @@ EDITOR=vim
 BASH_ENV="$HOME/.bashrc"
 USERNAME=$(id -nu)
 PAGER=less
-LESS=S	# I prefer to see lines not wrapped.  This also protects me from some
+LESS=SR # I prefer to see lines not wrapped.  This also protects me from some
 	# admin that sets this variable (ones it happened that he/she had set it
 	# to include x2 - one of the easiest ways to make me upset is to not
-	# treat tab as 8 spaces :))
+	# treat tab as 8 spaces :)).  'R' makes displaying of color sequences.
 
 export EDITOR BASH_ENV USERNAME PAGER LESS TMP TEMP
 

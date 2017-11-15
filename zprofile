@@ -85,10 +85,10 @@ unset VISUAL
 export EDITOR=vim
 
 PAGER=less
-LESS=S	# I prefer to see lines not wrapped.  This also protects me from some
+LESS=SR # I prefer to see lines not wrapped.  This also protects me from some
 	# admin that sets this variable (once it happened that he/she had set it
 	# to include x2 - one of the easiest ways to make me upset is to not
-	# treat tab as 8 spaces :))
+	# treat tab as 8 spaces :)).  'R' makes displaying of color sequences.
 
 # PAGER variable takes precedence over default pager setting for man but I have
 # it set without -r (so that viewing binary files won't mess with my terminal)
@@ -160,7 +160,8 @@ else
 	        exit 0;
 	    }
 	}
-	LOCALE_TEST_)
+	LOCALE_TEST_
+    )
   else
     for f in /usr/share/locale /usr/lib/locale; do
       if [[ -d $f ]]; then

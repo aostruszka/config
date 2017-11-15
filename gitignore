@@ -16,3 +16,4 @@ tags
 moc_*.cpp
 .ycm_extra_conf.py*
 compile_commands.json
+__pycache__/

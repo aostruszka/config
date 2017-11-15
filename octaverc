@@ -1,1 +1,2 @@
 PS1("\\s:\\W> ");
+graphics_toolkit gnuplot
