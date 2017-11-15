@@ -73,39 +73,6 @@ if ! has("unix")
   set shellslash
 endif
 
-" ---------------  Specific stuff for Polish language -------------
-" This should make my life easier since I'm editing in these charsets and
-" in theory they should be guessed automatically.  But this is a theory, the
-" problem is that if I start to edit ascii file that will set fenc=cp1250 and
-" this is not what I want (since I might add some accented characters and they
-" will be converted to cp1250 :( - instead of iso).  So instead of just doing
-" set fileencodings=ucs-bom,cp1250,cp852,iso-8859-2
-" I make a shortcut for setting it
-command! -nargs=? PLchsets call PLchsets(<f-args>)
-function! PLchsets(...)
-  if a:0 && a:1 =~? 'off'
-    set fencs&vim
-  else
-    set fencs=ucs-bom,cp1250,cp852,iso-8859-2
-  endif
-endfun
-
-" In addition to the above you can also use the below and place "exrc" in the
-" directory of the DOS/Windows files setting the appropriate fencs
-"set secure
-"set exrc
-
-" In any environment that supports Polish locale I'm setting it properly in my
-" profile so the only situation where this needs to be set is when there's no
-" support for locale.  In that case I'm adding Polish diacritical characters to
-" the default vim setting - only those that are not included already (∆Ê Í—Ò”Û
-" are in the 192-255 range)
-if $LC_CTYPE=='C'
-  set iskeyword+=°,±,£,≥,¶,∂,Ø,ø,¨,º
-endif
-
-" -----------------------------------------------------------------
-
 " GUI specific stuff (I don't use .gvimrc)
 if has("gui_running")
   if has("unix")
