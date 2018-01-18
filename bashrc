@@ -160,11 +160,6 @@ if [[ $- == *i* ]]; then	# if shell is interactive
 	    alias mcd="mount $cd_dir_"
 	    alias ucd="umount $cd_dir_"
 	    unset cd_dir_
-	    # Switching codes for LAT1_MAP and USER_MAP from
-	    # /usr/src/linux/Documentation/unicode.txt (in my case USER_MAP is
-	    # iso8859-2 but I'm mainly using only polish diacritical characters)
-	    alias plfont="echo -ne '\033(K'"
-	    alias usfont="echo -ne '\033(B'"
 	    # Well I often sit in the linux console so I've set up WindowMaker
 	    # and aliases below to remind me that I have X session running
 	    alias showX='if [ -e ~/.WMaker-running ]; then echo "Xsession running!"; fi'

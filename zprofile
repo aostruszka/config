@@ -1,6 +1,5 @@
 # .zprofile
 # Author: Andrzej M. Ostruszka
-# $Id: zprofile 104 2010-10-25 15:37:50Z aao014 $
 
 # User specific environment and startup programs.  There are two levels of
 # configuration: system specific (that is the ones that should be valid on all
@@ -46,12 +45,13 @@ esac
 # Sanitize the path (remove duplicated entries)
 typeset -U PATH
 
-if [[ $(id -un) == root ]]; then
-  # Most of time (as a root) I want to make user visible files
-  umask 022
-else
-  umask 027
-fi
+#if [[ $(id -un) == root ]]; then
+#  # Most of time (as a root) I want to make user visible files
+#  umask 022
+#else
+#  umask 027
+#fi
+umask 022
 
 # If ~/localroot exists then add ~/localroot/{bin,usr/bin} to PATH
 if [[ -d $HOME/localroot ]]; then
@@ -94,19 +94,9 @@ LESS=SR # I prefer to see lines not wrapped.  This also protects me from some
 # it set without -r (so that viewing binary files won't mess with my terminal)
 # which messes "coloring" in man so I correct it here.  This is nearly default
 # man setting - without case insensitive search.
-MANPAGER='less -srR'
+MANPAGER='less -sr'
 
-LESSCHARSET=iso8859 # I just make sure it has the correct value :)
-# $LESSCHARSET has precedence over $LESSCHARDEF but the below setting is useful
-# for viewing files with terminal escapes.  man by default invokes less with -r
-# (raw output) so all attributes (bold/underline...) are correctly set but e.g.
-# perldoc doesn't do this.  I could add r to the $LESS but I try to avoid it
-# cause viewing binary files could screw a terminal so instead I tell less that
-# ESC is a normal char and now I can make an alias like
-# perldoc="LESSCHARSET= perldoc" and I'll have what I wanted :))
-LESSCHARDEF=8bcccbcc13b.4b95.33b.
-
-export PAGER MANPAGER LESS LESSCHARSET LESSCHARDEF
+export PAGER MANPAGER LESS
 
 # There's no need for setting these on linux and cygwin but it's
 # harmless (I somehow need to do this on solaris cause it doesn't
@@ -131,10 +121,10 @@ export MANPL VERSION_CONTROL TIMEFMT
 # properly.  Users who don't speak polish should amend this part accordingly :))
 #
 # Unfortunatelly the locale names are not standarized.  It should be something
-# of the form: language_territory.codeset (e.g. pl_PL.iso8859-2) but on some
-# systems (solaris) it does not work so this is kind of workaround :) - I omit
-# the codeset below cause I think it is retrieved from the locale itself (it
-# would matter for me if there were more then one acceptable value for 'pl' :))
+# of the form: language_territory.codeset (e.g. pl_PL.utf8) but on some systems
+# (solaris) it does not work so this is kind of workaround :) - I omit the
+# codeset below cause I think it is retrieved from the locale itself (it would
+# matter for me if there were more then one acceptable value for 'pl' :))
 
 # Use the cached value (if it exists)
 
@@ -189,4 +179,4 @@ if [ -r ~/.zsh_local/zprofile ]; then
     . ~/.zsh_local/zprofile
 fi
 
-# vim: set sw=2 tw=80:
+# vim: set sw=4 tw=80:

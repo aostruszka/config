@@ -280,12 +280,6 @@ unset basic_ls_
 
 case $OSTYPE in
   *linux*) # Linux specific aliases
-    # Switching codes for LAT1_MAP and USER_MAP from
-    # /usr/src/linux/Documentation/unicode.txt (in my case USER_MAP is
-    # iso8859-2 but I'm mainly using only polish diacritical characters thus
-    # the 'pl' prefix in alias :))
-    alias plfont="echo -ne '\033(K'"
-    alias usfont="echo -ne '\033(B'"
     # This one is inspired by cygwin's cygrun alias (I got used to it
     # so much that I had to find linux equivalent :D)
     if type -w xdg-open > /dev/null; then alias xo=xdg-open; fi

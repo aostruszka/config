@@ -76,7 +76,7 @@ endif
 " GUI specific stuff (I don't use .gvimrc)
 if has("gui_running")
   if has("unix")
-    if has("gui_gtk2")
+    if has("gui_gtk2") || has("gui_gtk3")
       " It seems that in GTK2 this is equivalent of the below lengthy font name
       set guifont=Mono\ 10,Fixed\ 11
     else
