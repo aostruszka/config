@@ -190,38 +190,20 @@ if ! has("autocmd")
   finish
 endif
 
-let vundle_dir = ''
-let vundle_dirs = [ fnamemodify($MYVIMRC,":h"), $HOME."/.vim", $HOME."/vimfiles" ]
-for vd in vundle_dirs
-  if isdirectory(vd . "/bundle/Vundle.vim")
-    let vundle_dir = vd . "/bundle/Vundle.vim"
-    break
-  endif
-endfor
-
-if ! empty(vundle_dir)
-  filetype off " Required during Vundle configuration
-
-  " set the runtime path to include Vundle and initialize
-  exe "set rtp+=" . vundle_dir
-  call vundle#begin()
-
-  " let Vundle manage Vundle, required
-  Plugin 'gmarik/Vundle.vim'
-
-  " Couple plugins from GitHub
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'godlygeek/tabular'
-  Plugin 'Valloric/YouCompleteMe'
-  Plugin 'vim-airline/vim-airline'
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'scrooloose/nerdcommenter'
-  Plugin 'terryma/vim-multiple-cursors'
-
-  " All of your Plugins must be added before the following line
-  call vundle#end()            " required
-endif
-unlet vundle_dir vundle_dirs vd
+let g:airline_powerline_fonts = 1
+call plug#begin('~/.vim/bundle')
+  Plug 'junegunn/vim-plug'
+  Plug 'tpope/vim-fugitive'
+  Plug 'vim-airline/vim-airline'
+  Plug 'scrooloose/nerdtree'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  " I used this to generate nice config for tmux. Enable it, run e.g.:
+  " :Tmuxline powerline powerline
+  " :TmuxlineSnapshot tmux-theme.conf
+  " and source the resulting config file from tmux.conf
+  " but since I don't play with colors that often I disabled it for now
+  "Plug 'edkolev/tmuxline.vim'
+call plug#end()
 
 filetype plugin indent on
 
