@@ -16,6 +16,9 @@ if [[ ! -o interactive ]]; then	# finish if shell is not interactive
   return
 fi
 
+# default 40 is too long (at least for local shell) and interferes with some bindings
+KEYTIMEOUT=10
+
 # Options
 set -o no_list_packed # Align entries for listings
 set -o no_hup	      # Do not send the SIGHUP to the background jobs on exit
@@ -28,8 +31,8 @@ set -o hist_ignore_all_dups hist_no_functions hist_no_store
 HISTFILE=~/.zhistory
 HISTSIZE=1000 # Internal history list size
 SAVEHIST=$HISTSIZE # Number of entries stored in HISTFILE
-FCEDIT="vim -u NONE" # fc editing is usually very "primitive" so to speed up
-                     # vim startup I skip my configuration file
+FCEDIT="$EDITOR -u NONE" # fc editing is usually very "primitive" so to speed up
+			 # (n)vim startup I skip my configuration file
 # Set up the LS_COLORS variable - do it early so that its value can be use in
 # zstyle completions (see below)
 if type -w dircolors > /dev/null; then
@@ -277,6 +280,7 @@ alias lla="$basic_ls_ -lA"
 # solaris it is also present so I leave it outside case below
 alias llh="$basic_ls_ -lh"
 unset basic_ls_
+alias grep="grep --color=auto"
 
 case $OSTYPE in
   *linux*) # Linux specific aliases

@@ -13,6 +13,7 @@ tags
 *.vpj
 *.cm[oxi]
 *.autosave
+.gdb_history
 moc_*.cpp
 .ycm_extra_conf.py*
 compile_commands.json

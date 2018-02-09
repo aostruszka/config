@@ -82,7 +82,12 @@ export TMP TEMP
 # Usually programs which require VISUAL fall back to EDITOR if it's
 # missing so I keep only one variable - with more intuitive name :)
 unset VISUAL
-export EDITOR=vim
+if whence -p nvim > /dev/null; then
+    EDITOR=nvim
+else
+    EDITOR=vim
+fi
+export EDITOR
 
 PAGER=less
 LESS=SR # I prefer to see lines not wrapped.  This also protects me from some

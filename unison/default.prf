@@ -1,9 +1,10 @@
 # Unison preferences file
 
-ignore = Path .svn
-ignore = Path .git
+ignore = BelowPath .svn
+ignore = BelowPath .git
 ignore = Name .*.swp
 ignore = Name *~
+ignore = Name .*~
 ignore = Name *.exe
 ignore = Name *.cmi
 ignore = Name *.cmo
