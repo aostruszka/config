@@ -9,3 +9,15 @@ set -o extended_glob
 #a
 #b
 set -o no_sh_word_split
+
+# This will try to source every .zshenv in path between $HOME and $PWD
+# so that you can place .zshenv in some project directory and have it
+# automatically sourced when starting new shell in its subtree
+if [[ $PWD == $HOME/* ]]; then
+  o_=$HOME
+  for d_ in $(echo ${PWD#$o_} | tr '/' ' '); do
+    o_+=/$d_
+    if [ -r $o_/.zshenv ]; then . $o_/.zshenv; fi
+  done
+  unset o_ d_
+fi

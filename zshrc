@@ -148,6 +148,11 @@ bindkey -M viins '^[n' history-beginning-search-forward
 # These two are also handy but I change default binding
 bindkey -M viins '^[P' _history-complete-older
 bindkey -M viins '^[N' _history-complete-newer
+# Incremental search is also nice but I change binding for forward since
+# I use ^S for screen/tmux prefix
+bindkey -M viins "^R" history-incremental-search-backward
+bindkey -M viins "^T" history-incremental-search-forward
+
 
 # This one is sometimes handy so I bind it too
 bindkey -M viins '^[q' push-line
