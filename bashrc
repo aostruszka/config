@@ -198,8 +198,8 @@ if [[ $- == *i* ]]; then	# if shell is interactive
 	. $BASH_COMPLETION
     fi
 
-    if [ -r ~/.bash_local/bashrc ]; then	# Host specific settings
-	. ~/.bash_local/bashrc
+    if [ -r ~/.local/bash/bashrc ]; then	# Host specific settings
+	. ~/.local/bash/bashrc
     fi
 fi
 

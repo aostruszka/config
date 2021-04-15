@@ -4,7 +4,7 @@
 # User specific environment and startup programs.  There are two levels of
 # configuration: system specific (that is the ones that should be valid on all
 # hosts of given type) and host specific.  The first class is handled by case'es
-# and the second by the .bash_local directory (if present).
+# and the second by the .local/bash directory (if present).
 
 shopt -s extglob        # I'm using extended patterns
 
@@ -174,8 +174,8 @@ fi
 unset host_ value_
 
 # Source any local (host specific) settings
-if [ -r "$HOME/.bash_local/bash_profile" ]; then
-    . "$HOME/.bash_local/bash_profile"
+if [ -r "$HOME/.local/bash/bash_profile" ]; then
+    . "$HOME/.local/bash/bash_profile"
 fi
 
 # If load_user_profile_ is set then this means that we are being sourced for the
