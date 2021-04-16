@@ -35,7 +35,6 @@ set history=50          " Keep 50 lines of cmd_line history (also used
 			" as a default for various options in viminfo)
 set viminfo='50,\"50	" Read/write a .viminfo file, don't store more
 			" than 50 lines of registers
-set pastetoggle=<F10>	" Switch between paste/nopaste via <F10>
 set ruler		" Use ruler
 set hidden		" Allow switching between buffers without '!'
 set helpheight=15	" Minimal help window height
@@ -190,6 +189,13 @@ if ! has("autocmd")
   finish
 endif
 
+" Automatic installation of vim-plug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 let g:airline_powerline_fonts = 1
 call plug#begin('~/.vim/bundle')
   Plug 'junegunn/vim-plug'
@@ -197,6 +203,10 @@ call plug#begin('~/.vim/bundle')
   Plug 'vim-airline/vim-airline'
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
+  Plug 'ConradIrwin/vim-bracketed-paste'
   " I used this to generate nice config for tmux. Enable it, run e.g.:
   " :Tmuxline powerline powerline
   " :TmuxlineSnapshot tmux-theme.conf
