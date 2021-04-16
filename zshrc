@@ -248,6 +248,28 @@ auto_titlebar () {
   esac
 }
 
+# Turns on/off automouting in GNOME
+automount() {
+  case $1 in
+    false | true )
+      arg=$1
+      ;;
+    0 | off )
+      arg=false
+      ;;
+    1 | on )
+      arg=true
+      ;;
+    * )
+      echo -e "Provide argument [ false | true ]\nCurrent settings:"
+      gsettings get org.gnome.desktop.media-handling automount
+      gsettings get org.gnome.desktop.media-handling automount-open
+      return
+  esac
+  gsettings set org.gnome.desktop.media-handling automount $arg
+  gsettings set org.gnome.desktop.media-handling automount-open $arg
+}
+
 h() { fc -l -${1:-20} } # List last X (20 by default) commands
 alias p=${PAGER:=less}	# use env var (and set it if empty)
 alias e=${EDITOR:=vim}

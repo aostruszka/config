@@ -35,4 +35,4 @@
 	submodule = log
 	renames = true
 [push]
-	default = simple
+	default = upstream
