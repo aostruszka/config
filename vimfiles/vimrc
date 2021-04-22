@@ -66,6 +66,7 @@ set completeopt=longest,menu,preview " For insert completions use longest, show
 set foldminlines=2	" What is the point in having 1 line (default) fold?
 set listchars+=tab:>-	" For 'list' I prefer tabs to be ">-------" than ^I
 set virtualedit=block   " Allow selection of the block beyond the end of lines
+set diffopt+=vertical   " I prefer to have vertical diffs as a default
 
 if ! has("unix")
   " I use cygwin zsh/bash as a shell so I need to set this
