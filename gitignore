@@ -18,4 +18,5 @@ moc_*.cpp
 .ycm_extra_conf.py*
 compile_commands.json
 compile_flags.txt
+.cache/
 __pycache__/

@@ -1,6 +1,6 @@
 [core]
-	pager="less -FRX"
-	excludesfile="/home/andrzej/.gitignore"
+	pager = "less -FRX"
+	excludesfile = ~/.gitignore
 [user]
 	name = Andrzej Ostruszka
 	email = andrzej.ostruszka@gmail.com
@@ -36,3 +36,5 @@
 	renames = true
 [push]
 	default = upstream
+[http]
+	cookiefile = ~/.gitcookies
