@@ -161,11 +161,6 @@ inoremap <C-B> <Left>
 noremap <F1> :help <C-R>=expand('<cWORD>')<CR><CR>
 imap <F1> <C-O><F1>
 
-" Switching between buffers (<C-N> and <C-P> are valid commands but I'm not
-" using them (I'm using standard vi j,k and cursor keys)
-noremap <C-N> :bn<CR>
-noremap <C-P> :bp<CR>
-
 " Current date
 iab dmY <C-R>=strftime("%d.%m.%Y")<CR>
 
@@ -206,9 +201,10 @@ let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.notexists = 'Ɇ'
 
-call plug#begin('~/.vim/bundle')
+call plug#begin(data_dir . '/bundle')
   Plug 'junegunn/vim-plug'
   Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-unimpaired'
   Plug 'vim-airline/vim-airline'
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
