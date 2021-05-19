@@ -1,7 +1,7 @@
 " Vim startup file by
 " Author: Andrzej Ostruszka
 
-if version < 700
+if version < 702
   echo "Get a newer vim :)), this startup file probably won't work!"
   sleep 2		" I'm insisting on keeping up to date :))
   q			" But you can override this with `vim -u NONE'
@@ -31,10 +31,9 @@ set formatoptions=12tcql " Global formatting options
 set comments=sr:/*,mb:*,ex:*/,://,b:#,:%,n:>,fb:-
 set backup		" Keep a backup files,
 set backupdir=~/.vim-backup,~/tmp,.	" but store them in these directories
-set history=50          " Keep 50 lines of cmd_line history (also used
-			" as a default for various options in viminfo)
-set viminfo='50,\"50	" Read/write a .viminfo file, don't store more
-			" than 50 lines of registers
+set history=100		" Keep 50 lines of cmd_line history (also used
+			" as a default for various options in shada)
+set shada='50,<1000,s100	" Read/write a shada file
 set ruler		" Use ruler
 set hidden		" Allow switching between buffers without '!'
 set helpheight=15	" Minimal help window height
@@ -64,9 +63,13 @@ set complete-=i		" I don't want to search all system include files on
 set completeopt=longest,menu,preview " For insert completions use longest, show
 			" a popup menu and details in preview (if opened)
 set foldminlines=2	" What is the point in having 1 line (default) fold?
-set listchars+=tab:>-	" For 'list' I prefer tabs to be ">-------" than ^I
+set listchars+=tab:>-,trail:·,eol:$	" For 'list' I prefer tabs to be
+			" >-------" than ^I plus some extra for trailing whites
 set virtualedit=block   " Allow selection of the block beyond the end of lines
 set diffopt+=vertical   " I prefer to have vertical diffs as a default
+
+nnoremap <Space> <Nop>
+let mapleader=' '	" Use <Space> as a map <Leader>
 
 if ! has("unix")
   " I use cygwin zsh/bash as a shell so I need to set this
@@ -204,6 +207,11 @@ else
   let g:airline_symbols.maxlinenr = ''
   let g:airline_symbols.notexists = 'Ɇ'
 endif
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#windowswap#enabled = 1
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
 
 call plug#begin(data_dir . '/bundle')
   Plug 'junegunn/vim-plug'
@@ -216,6 +224,7 @@ call plug#begin(data_dir . '/bundle')
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   Plug 'ConradIrwin/vim-bracketed-paste'
+  Plug 'wesQ3/vim-windowswap'
   " I used this to generate nice config for tmux. Enable it, run e.g.:
   " :Tmuxline powerline powerline
   " :TmuxlineSnapshot tmux-theme.conf
