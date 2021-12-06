@@ -308,6 +308,7 @@ alias lla="$basic_ls_ -lA"
 alias llh="$basic_ls_ -lh"
 unset basic_ls_
 alias grep="grep --color=auto"
+type -w fdfind > /dev/null && alias ff=fdfind
 
 case $OSTYPE in
   *linux*) # Linux specific aliases

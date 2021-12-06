@@ -42,9 +42,6 @@ case $OSTYPE in
     ;;
 esac
 
-# Sanitize the path (remove duplicated entries)
-typeset -U PATH
-
 #if [[ $(id -un) == root ]]; then
 #  # Most of time (as a root) I want to make user visible files
 #  umask 022
@@ -60,6 +57,13 @@ if [[ -d $HOME/localroot ]]; then
   done
 fi
 unset f
+
+# Check for cargo path
+if [[ -n $CARGOPATH ]]; then
+    PATH=$CARGOPATH:$PATH
+elif [[ -d $HOME/.cargo/bin ]]; then
+    PATH=$HOME/.cargo/bin:$PATH
+fi
 
 # If ~/bin exist then prepend it to the PATH
 [[ -d $HOME/bin ]] && PATH=$HOME/bin:$PATH
@@ -108,9 +112,14 @@ export PAGER MANPAGER LESS
 # fallback to ~/.terminfo)
 export TERMINFO=$HOME/.terminfo
 
-# Set those below only if they are not empty (Note: export by itself prints the
-# exported variables)
-#export ${MANPATH:+MANPATH} ${INFOPATH:+INFOPATH}
+# Add local man/info dirs if present
+if [[ -d ~/.local/share/man ]]; then
+    export  MANPATH=~/.local/share/man:${MANPATH:-$(man --path)}
+fi
+# In case of info we don't have to append defaults - they are always used
+if [[ -d ~/.local/share/info ]]; then
+    export INFOPATH=~/.local/share/info
+fi
 
 # These three seems to be GNU specific but I guess they are harmless for nonGNU
 MANPL=60	# man pages length
@@ -183,5 +192,8 @@ unset host_ value_
 if [ -r ~/.local/zsh/zprofile ]; then
     . ~/.local/zsh/zprofile
 fi
+
+# Sanitize the path (remove duplicated entries)
+typeset -U PATH
 
 # vim: set sw=4 tw=80:
