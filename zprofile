@@ -67,6 +67,7 @@ fi
 
 # If ~/bin exist then prepend it to the PATH
 [[ -d $HOME/bin ]] && PATH=$HOME/bin:$PATH
+[[ -d $HOME/.local/bin ]] && PATH=$HOME/.local/bin:$PATH
 
 if [[ -d $HOME/tmp ]]; then
     TMP=$HOME/tmp
