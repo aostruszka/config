@@ -33,7 +33,11 @@ set backup		" Keep a backup files,
 set backupdir=~/.vim-backup,~/tmp,.	" but store them in these directories
 set history=100		" Keep 50 lines of cmd_line history (also used
 			" as a default for various options in shada)
-set shada='50,<1000,s100	" Read/write a shada file
+if has("nvim")
+  set shada='50,<1000,s100	" Read/write a shada file
+else
+  set viminfo='50,<1000,s100
+endif
 set ruler		" Use ruler
 set hidden		" Allow switching between buffers without '!'
 set helpheight=15	" Minimal help window height
