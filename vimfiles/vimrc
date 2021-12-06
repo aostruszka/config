@@ -69,7 +69,8 @@ set virtualedit=block   " Allow selection of the block beyond the end of lines
 set diffopt+=vertical   " I prefer to have vertical diffs as a default
 
 nnoremap <Space> <Nop>
-let mapleader=' '	" Use <Space> as a map <Leader>
+let mapleader=' '	" Use <Space> as a map <Leader> and <LocalLeader>
+let maplocalleader=' '	
 
 if ! has("unix")
   " I use cygwin zsh/bash as a shell so I need to set this
@@ -81,14 +82,14 @@ if has("gui_running")
   if has("unix")
     if has("gui_gtk2") || has("gui_gtk3")
       " It seems that in GTK2 this is equivalent of the below lengthy font name
-      set guifont=Mono\ 10,Fixed\ 11
+      set guifont=NotoMono\ Nerd\ Font\ 12,Mono\ 10,Fixed\ 11
     else
       set guifont=-misc-fixed-medium-r-normal-*-*-140-*-*-c-*-iso8859-2
     endif
     " Show man pages in separate xterm window
     set keywordprg=xterm\ -e\ man
   else
-    set guifont=Consolas:h11:cEASTEUROPE
+    set guifont=NotoMono\ Nerd\ Font:h12,Consolas:h11:cEASTEUROPE
   endif
 
   set guioptions-=T " I don't remember myself using a toolbar.
@@ -177,10 +178,10 @@ if &t_Co > 2 || has("gui_running")
 
   " This command highlights any part sticking out beyond 'tw'.  You can clear it
   " with :match none
-  command! RightMargin if &tw>0 | exe 'match NonText /.\%>'. &tw .'v./' | end
+  command! ShowRightMargin if &tw>0 | exe 'match NonText /.\%>'. &tw .'v./' | end
 
   " I often use these in "normal text files"
-  command! Fixme syn keyword Todo TODO FIXME NOTE XXX contained
+  command! ShowFixme syn keyword Todo TODO FIXME NOTE XXX contained
 endif
 
 " =============== AUTOCOMMANDS ===============
@@ -195,6 +196,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+let g:airline#extensions#whitespace#mixed_indent_algo = 2
 if $NERD_FONT
   let g:airline_powerline_fonts = 1
 else
@@ -220,6 +222,7 @@ call plug#begin(data_dir . '/bundle')
   Plug 'vim-airline/vim-airline'
   Plug 'scrooloose/nerdtree'
   Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'godlygeek/tabular'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
@@ -231,9 +234,36 @@ call plug#begin(data_dir . '/bundle')
   " and source the resulting config file from tmux.conf
   " but since I don't play with colors that often I disabled it for now
   "Plug 'edkolev/tmuxline.vim'
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'rhysd/vim-clang-format'
+  " This needs to be last - modifies previous plugins to use "nerd"ish icons
+  if $NERD_FONT
+    Plug 'ryanoasis/vim-devicons'
+  endif
 call plug#end()
 
 filetype plugin indent on
+
+" Coc configuration
+" Better highlighting for dark background which I'm always using
+hi CocFloating ctermbg=235 guibg=#262626
+" Some mapping (for now QtCreator like since I often use it too)
+nmap <unique> <silent><C-k>d <Plug>(coc-definition)
+nmap <unique> <silent><C-k>D <Plug>(coc-declaration)
+nmap <unique> <silent><C-k>i <Plug>(coc-implementation)
+nmap <unique> <silent><C-k>r <Plug>(coc-references)
+nmap <unique> <silent><C-k>: :CocList -I symbols<CR>
+nmap <unique> <silent><C-k>. :CocList outline<CR>
+nmap <unique> <silent><C-k>n <Plug>(coc-rename)
+nmap <unique> <silent><C-k>a <Plug>(coc-codeaction)
+vmap <unique> <silent><C-k>a <Plug>(coc-codeaction-selected)
+nmap <unique> <silent><C-k>h :CocCommand clangd.switchSourceHeader<CR>
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Now is good time to turn on possibly postponed syntax highlighting
 if &t_Co > 2 || has("gui_running") | syntax on | endif

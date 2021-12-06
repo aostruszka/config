@@ -1,12 +1,18 @@
-if !exists("*s:C_Alternate") " Do not define functions twice
+nnoremap <silent> <buffer> <LocalLeader>a :call <SID>C_Alternate(0)<CR>
+nnoremap <silent> <buffer> <LocalLeader>s :call <SID>C_Alternate(1)<CR>
+nnoremap <silent> <buffer> <LocalLeader>w :call <SID>C_Alternate(2)<CR>
+
+if exists("*s:C_Alternate") " Do not define functions twice
+  finish
+endif
 
 " Switching between source and header files via \a, \s, \w
 " If the 'alternative' buffer is alredy open in some window all these macros
 " jump to this window, otherwise:
-" \a loads buffer in current window
-" \s splits the window and opens the alternative in the new window
-" \w if there is other window opened jump to that window and load buffer,
-"    otherwise it acts like \s
+" <LocalLeader>a loads buffer in current window
+" <LocalLeader>s splits the window and opens the alternative in the new window
+" <LocalLeader>w if there is other window opened jump to that window and load
+"    buffer, otherwise it acts like <LocalLeader>s
 let s:header_ext = [ ".h", ".hh", ".hpp", ".hxx" ]
 let s:source_ext = [ ".c", ".cc", ".cpp", ".cxx" ]
 let s:ext_map = { }
@@ -108,9 +114,3 @@ function! s:C_Alternate(win)
     endif
   endif
 endfunction
-
-endif " exist("*s:C_Alternate")
-
-nnoremap <silent> <buffer> <LocalLeader>a :call <SID>C_Alternate(0)<CR>
-nnoremap <silent> <buffer> <LocalLeader>s :call <SID>C_Alternate(1)<CR>
-nnoremap <silent> <buffer> <LocalLeader>w :call <SID>C_Alternate(2)<CR>
