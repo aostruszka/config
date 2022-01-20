@@ -70,6 +70,7 @@ set diffopt+=vertical   " I prefer to have vertical diffs as a default
 if has("nvim")
   set inccommand=nosplit	" Live preview of :substitute without split
   set shada='50,<1000,s100	" Read/write a shada file
+  colorscheme amo		" Neovim 0.6 no longer looks at syncolor.vim
 else
   set nocompatible	" Use Vim defaults (much better!)
   set viminfo='50,<1000,s100

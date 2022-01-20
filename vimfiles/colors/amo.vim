@@ -1,0 +1,1 @@
+../after/syntax/syncolor.vim
