@@ -17,6 +17,7 @@
 	dc = diff --cached
 	l  = log --pretty=format:\"%Cgreen%h%Creset %s\"
 	sl = stash list
+	# Mnemonic is "stash save"
 	ss = stash push
 	# Mnemonic is "stash view"
 	sv = stash show
@@ -24,6 +25,7 @@
 	sp = stash pop
 	# Mnemonic "publish"
 	pub = push --recurse-submodules=on-demand
+	track = for-each-ref --format='%(refname:short) -> %(upstream:short)' refs/heads
 [gui]
 	fontdiff = -family \"Courier New\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
 	encoding = utf-8
