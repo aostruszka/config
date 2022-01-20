@@ -10,7 +10,6 @@ endif
 behave xterm		" This is what I'm used to :))
 set incsearch		" This is for a try - maybe I'll like it :)
 set hlsearch		" Let's try highlighting of search pattern
-set nocompatible	" Use Vim defaults (much better!)
 set cpoptions-=a	" Don't set alternate file name when :read 'ing files
 set nostartofline	" Do not change column when `moving around'
 set bs=indent,eol,start " Allow backspacing over everything in insert mode
@@ -33,11 +32,6 @@ set backup		" Keep a backup files,
 set backupdir=~/.vim-backup,~/tmp,.	" but store them in these directories
 set history=100		" Keep 50 lines of cmd_line history (also used
 			" as a default for various options in shada)
-if has("nvim")
-  set shada='50,<1000,s100	" Read/write a shada file
-else
-  set viminfo='50,<1000,s100
-endif
 set ruler		" Use ruler
 set hidden		" Allow switching between buffers without '!'
 set helpheight=15	" Minimal help window height
@@ -71,6 +65,15 @@ set listchars+=tab:>-,trail:·,eol:$	" For 'list' I prefer tabs to be
 			" >-------" than ^I plus some extra for trailing whites
 set virtualedit=block   " Allow selection of the block beyond the end of lines
 set diffopt+=vertical   " I prefer to have vertical diffs as a default
+
+" Neovim/Vim differences
+if has("nvim")
+  set inccommand=nosplit	" Live preview of :substitute without split
+  set shada='50,<1000,s100	" Read/write a shada file
+else
+  set nocompatible	" Use Vim defaults (much better!)
+  set viminfo='50,<1000,s100
+endif
 
 nnoremap <Space> <Nop>
 let mapleader=' '	" Use <Space> as a map <Leader> and <LocalLeader>
