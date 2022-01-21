@@ -303,10 +303,6 @@ function! LastMod()
   call histdel("/",-1)
 endfun
 
-" Automatic changing of the directory if it is configured
-command! -nargs=1 -complete=dir TabDir let t:work_dir=fnamemodify(<f-args>, ":p")
-autocmd TabEnter * if exists('t:work_dir') | exe "cd ".t:work_dir | endif
-
 " I don't want to have separate ftplugin just for one command
 " fo-=l is for 'mail' cause it is set in default ftplugin :(
 autocmd FileType cvs,crontab,mail	setlocal nobackup fo-=l
