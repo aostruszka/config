@@ -223,6 +223,12 @@ let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#windowswap#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 2
 
+let g:coc_global_extensions = [
+      \ 'coc-json',
+      \ 'coc-marketplace',
+      \ 'coc-clangd'
+      \]
+
 call plug#begin(data_dir . '/bundle')
   Plug 'junegunn/vim-plug'
   Plug 'tpope/vim-fugitive'
