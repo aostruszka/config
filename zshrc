@@ -277,10 +277,14 @@ alias ge="gvim --remote-silent"
 
 alias md=mkdir
 alias pd=pushd
+alias dv='dirs -v'
 alias ungzip=gunzip			# I often make such mistake :))
 alias gdb='gdb -q'
 alias bc='bc -q'
 [[ -n $LESSCHARDEF ]] && alias perldoc='LESSCHARSET= perldoc'
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 #if type -w pinfo > /dev/null; then alias info=pinfo; fi
 

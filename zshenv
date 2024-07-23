@@ -10,6 +10,10 @@ set -o extended_glob
 #b
 set -o no_sh_word_split
 
+if [ -r ~/.local/zsh/zshenv ]; then # Host specific settings
+  . ~/.local/zsh/zshenv
+fi
+
 # This will try to source every .zshenv in path between $HOME and $PWD
 # so that you can place .zshenv in some project directory and have it
 # automatically sourced when starting new shell in its subtree
