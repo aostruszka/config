@@ -314,6 +314,12 @@ unset basic_ls_
 alias grep="grep --color=auto"
 type -w fdfind > /dev/null && alias ff=fdfind
 
+# FZF related section
+if type -w fzf > /dev/null; then
+  alias fd='pd +${$(dirs -v | fzf --height=20% --reverse | cut -f 1):-0}'
+  source <(fzf --zsh)
+fi
+
 case $OSTYPE in
   *linux*) # Linux specific aliases
     # This one is inspired by cygwin's cygrun alias (I got used to it
